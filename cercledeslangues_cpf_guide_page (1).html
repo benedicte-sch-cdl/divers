@@ -1,0 +1,416 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F3EE;
+    --ink: #1C1A17;
+    --ink-soft: #5A5651;
+    --gold: #C4923A;
+    --gold-light: #F2E3C8;
+    --sand: #E8DFD3;
+    --white: #FDFAF7;
+    --border: rgba(28,26,23,0.12);
+  }
+  body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--ink); }
+
+  .wrap { max-width: 820px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
+
+  /* H1 */
+  .page-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-light);
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+    max-width: 700px;
+  }
+
+  h1 em { font-style: italic; color: var(--gold); }
+
+  /* INTRO TEXT */
+  .intro {
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--gold-light);
+    padding-left: 1.25rem;
+    margin-bottom: 3.5rem;
+    max-width: 680px;
+  }
+
+  .intro p + p { margin-top: 1rem; }
+
+  .intro strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* CTA LINE */
+  .cta-line {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cta-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* STEP BLOCS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 3.5rem;
+  }
+
+  .step-bloc {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 1.4rem 1.2rem 1.2rem;
+    background: var(--white);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-bloc::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold-light);
+    transition: background 0.2s;
+  }
+
+  .step-bloc:hover { border-color: var(--gold); background: var(--cream); }
+  .step-bloc:hover::before { background: var(--gold); }
+  .step-bloc.active { border-color: var(--gold); background: var(--cream); }
+  .step-bloc.active::before { background: var(--gold); }
+
+  .bloc-num {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .bloc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+  }
+
+  .bloc-desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .bloc-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  /* SOMMAIRES */
+  .sommaires { display: flex; flex-direction: column; gap: 0; }
+
+  .accordion {
+    border-top: 1px solid var(--border);
+  }
+
+  .accordion:last-child { border-bottom: 1px solid var(--border); }
+
+  .accordion-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.35rem 0;
+    cursor: pointer;
+    user-select: none;
+    gap: 1rem;
+  }
+
+  .accordion-head-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .acc-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .acc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .acc-count {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    margin-left: 4px;
+  }
+
+  .acc-icon {
+    width: 28px; height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft);
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  .acc-icon.open { transform: rotate(180deg); }
+
+  .accordion-body {
+    display: none;
+    padding-bottom: 1.75rem;
+  }
+
+  .accordion-body.open { display: block; }
+
+  .links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .links-list li a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    line-height: 1.45;
+  }
+
+  .links-list li a:hover {
+    border-color: var(--border);
+    background: var(--white);
+    color: var(--gold);
+  }
+
+  .link-arrow {
+    font-size: 11px;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="page-tag">Guide CPF 2026</div>
+
+  <h1>Guide du CPF : les démarches expliquées pas à pas pour vous permettre de suivre une <em>formation en langue</em> grâce à votre CPF</h1>
+
+  <div class="intro">
+    <p>Le Compte Personnel de Formation (CPF) est un droit individuel qui permet aux salariés, employés du public et travailleurs indépendants de se former professionnellement tout au long de leur carrière. Il n'est pas dépendant de leur employeur et a pour but d'approfondir des connaissances dans un métier, travailler à une reconversion ou encore développer des compétences transversales (comme les langues).</p>
+    <p>Depuis sa mise en place, le CPF souffre d'une réputation compliquée et la récente <strong>réforme de février 2026</strong> vient également rebattre les cartes. Malgré tout, le but de ces articles est de vous faire voir qu'il est simple de s'inscrire à une formation avec son CPF.</p>
+    <p><strong>Cliquez sur l'élément qui vous intéresse, et suivez le guide !</strong></p>
+  </div>
+
+  <!-- BLOCS ÉTAPES -->
+  <div class="cta-line">Où en êtes-vous ?</div>
+
+  <div class="steps-grid">
+    <button class="step-bloc active" onclick="selectBloc(this, 'trouver')">
+      <div class="bloc-num">Étape 01</div>
+      <div class="bloc-title">Comment trouver une formation CPF</div>
+      <div class="bloc-desc">Comprendre le dispositif, identifier les formations éligibles et choisir le bon organisme.</div>
+      <span class="bloc-cta">Voir les articles →</span>
+    </button>
+    <button class="step-bloc" onclick="selectBloc(this, 'financer')">
+      <div class="bloc-num">Étape 02</div>
+      <div class="bloc-title">Comment financer sa formation</div>
+      <div class="bloc-desc">Utiliser son solde CPF, obtenir des co-financements et gérer son dossier.</div>
+      <span class="bloc-cta">Voir les articles →</span>
+    </button>
+    <button class="step-bloc" onclick="selectBloc(this, 'post')">
+      <div class="bloc-num">Étape 03</div>
+      <div class="bloc-title">Les étapes post-inscription</div>
+      <div class="bloc-desc">Suivi de dossier, contrôles, et comment valoriser sa certification après la formation.</div>
+      <span class="bloc-cta">Voir les articles →</span>
+    </button>
+  </div>
+
+  <!-- SOMMAIRES -->
+  <div class="sommaires">
+
+    <!-- SOMMAIRE 1 -->
+    <div class="accordion" id="acc-trouver">
+      <div class="accordion-head" onclick="toggleAcc('trouver')">
+        <div class="accordion-head-left">
+          <div class="acc-num">1</div>
+          <div>
+            <span class="acc-title">Comment trouver une formation CPF</span>
+            <span class="acc-count">15 articles</span>
+          </div>
+        </div>
+        <div class="acc-icon open" id="icon-trouver">▾</div>
+      </div>
+      <div class="accordion-body open" id="body-trouver">
+        <ul class="links-list">
+          <li><a href="https://www.cercledeslangues.com/blog/formation-cpf-c-est-quoi" target="_blank"><span class="link-arrow">→</span>Formation CPF : c'est quoi ? Toutes les informations à connaître</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/qui-peut-beneficier-formation-anglais-cpf" target="_blank"><span class="link-arrow">→</span>Qui peut bénéficier du CPF pour financer une formation ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-creer-ou-activer-son-compte-cpf-pour-la-premiere-fois" target="_blank"><span class="link-arrow">→</span>Comment créer ou activer son compte CPF pour la première fois ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-se-connecter-avec-son-identite-numerique-pour-financer-sa-formation-avec-son-cpf" target="_blank"><span class="link-arrow">→</span>Comment se connecter avec son identité numérique pour financer sa formation avec son CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/france-identite-le-guide-complet-pour-creer-et-utiliser-votre-identite-numerique" target="_blank"><span class="link-arrow">→</span>France Identité : le guide complet pour créer et utiliser votre identité numérique</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/guide-comment-consulter-mon-compte-cpf" target="_blank"><span class="link-arrow">→</span>Guide : comment consulter mon compte CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-utiliser-son-cpf-pour-une-formation-en-langue" target="_blank"><span class="link-arrow">→</span>Comment utiliser son CPF pour une formation en langue ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/formation-anglais-cpf-prix" target="_blank"><span class="link-arrow">→</span>Combien coûte une formation d'anglais financée par le CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/cpf-et-certification" target="_blank"><span class="link-arrow">→</span>CPF et certification : comprendre le lien pour financer sa formation en toute sérénité</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/choisir-sa-formation-anglais-cpf" target="_blank"><span class="link-arrow">→</span>Comment choisir sa formation d'anglais CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/organisme-de-formation-criteres" target="_blank"><span class="link-arrow">→</span>Comment reconnaître un organisme de formation sérieux : les critères à vérifier</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/formation-anglais-travail-cpf" target="_blank"><span class="link-arrow">→</span>Comment se former à l'anglais sur son temps de travail avec le CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/faire-financer-sa-formation-danglais-par-pole-emploi" target="_blank"><span class="link-arrow">→</span>Financer sa formation d'anglais par France Travail (ex Pôle Emploi)</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/quest-ce-que-le-fonds-assurance-formation" target="_blank"><span class="link-arrow">→</span>Qu'est-ce que le Fonds d'Assurance Formation et comment en bénéficier ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/demarches-cpf-qui-peut-vraiment-vous-accompagner" target="_blank"><span class="link-arrow">→</span>Démarches CPF : qui peut vraiment vous accompagner ?</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SOMMAIRE 2 -->
+    <div class="accordion" id="acc-financer">
+      <div class="accordion-head" onclick="toggleAcc('financer')">
+        <div class="accordion-head-left">
+          <div class="acc-num">2</div>
+          <div>
+            <span class="acc-title">Comment financer sa formation</span>
+            <span class="acc-count">15 articles</span>
+          </div>
+        </div>
+        <div class="acc-icon" id="icon-financer">▾</div>
+      </div>
+      <div class="accordion-body" id="body-financer">
+        <ul class="links-list">
+          <li><a href="https://www.cercledeslangues.com/blog/reforme-du-cpf-2026-ce-qui-change-pour-vos-formations-en-langue" target="_blank"><span class="link-arrow">→</span>Réforme du CPF 2026 : ce qui change pour vos formations en langue</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/payer-une-formation-via-son-compte-cpf" target="_blank"><span class="link-arrow">→</span>Comment payer une formation via son compte CPF : le guide pas à pas</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/etapes-apres-inscription-formation-cpf" target="_blank"><span class="link-arrow">→</span>Quelles sont les étapes après une inscription à une formation CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-financer-sa-formation-sans-cpf" target="_blank"><span class="link-arrow">→</span>Comment financer sa formation sans CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/cpf-ne-couvre-pas-prix-formation" target="_blank"><span class="link-arrow">→</span>Que faire si le montant du CPF ne couvre pas le coût de la formation en langue ? Notre tuto pas à pas</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-effectuer-abondement-pour-completer-cpf" target="_blank"><span class="link-arrow">→</span>Comment effectuer un abondement pour compléter son CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-faire-une-demande-de-formation-a-son-employeur" target="_blank"><span class="link-arrow">→</span>Comment faire une demande de formation à son employeur ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/financement-complementaire-cpf-france-travail" target="_blank"><span class="link-arrow">→</span>Comment demander un financement complémentaire auprès de France Travail pour sa formation ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/est-ce-que-je-perds-mes-allocations-chomage-si-je-demarre-une-formation" target="_blank"><span class="link-arrow">→</span>Est-ce que je perds mes allocations chômage si je démarre une formation ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-demander-un-financement-complementaire-aupres-de-sa-region-pour-completer-son-cpf" target="_blank"><span class="link-arrow">→</span>Comment demander un financement complémentaire auprès de sa région pour compléter son CPF ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/cpf-et-employeur-comprendre-ses-droits" target="_blank"><span class="link-arrow">→</span>CPF et employeur : démêler le vrai du faux</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/comment-financer-une-formation-cpf-quand-on-est-independant-ou-freelance" target="_blank"><span class="link-arrow">→</span>Comment financer une formation CPF quand on est indépendant ou freelance ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/financer-une-formation-a-la-retraite" target="_blank"><span class="link-arrow">→</span>Comment financer une formation quand je suis retraité ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/cpf-comment-financer-une-formation-quand-on-travaille-dans-le-secteur-public" target="_blank"><span class="link-arrow">→</span>CPF : comment financer une formation quand on travaille dans le secteur public ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/une-arnaque-compte-cpf" target="_blank"><span class="link-arrow">→</span>Comment éviter et reconnaître une arnaque compte CPF ?</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SOMMAIRE 3 -->
+    <div class="accordion" id="acc-post">
+      <div class="accordion-head" onclick="toggleAcc('post')">
+        <div class="accordion-head-left">
+          <div class="acc-num">3</div>
+          <div>
+            <span class="acc-title">Les étapes post-inscription</span>
+            <span class="acc-count">3 articles</span>
+          </div>
+        </div>
+        <div class="acc-icon" id="icon-post">▾</div>
+      </div>
+      <div class="accordion-body" id="body-post">
+        <ul class="links-list">
+          <li><a href="https://www.cercledeslangues.com/blog/formation-cpf-non-suivie" target="_blank"><span class="link-arrow">→</span>Formation CPF non suivie : les conséquences et recours possibles</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/dossier-cpf-controle-caisse-des-depots-ineligibilite" target="_blank"><span class="link-arrow">→</span>Que faire si mon dossier CPF passe sous contrôle de la Caisse des Dépôts pour inéligibilité ?</a></li>
+          <li><a href="https://www.cercledeslangues.com/blog/que-faire-apres-une-formation-cpf" target="_blank"><span class="link-arrow">→</span>Que faire après une formation CPF ? Les étapes clés pour en tirer un vrai bénéfice</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const sections = ['trouver', 'financer', 'post'];
+
+  function toggleAcc(id) {
+    const body = document.getElementById('body-' + id);
+    const icon = document.getElementById('icon-' + id);
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    icon.classList.toggle('open', !isOpen);
+  }
+
+  function selectBloc(btn, target) {
+    document.querySelectorAll('.step-bloc').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    sections.forEach(id => {
+      const body = document.getElementById('body-' + id);
+      const icon = document.getElementById('icon-' + id);
+      if (id === target) {
+        body.classList.add('open');
+        icon.classList.add('open');
+        document.getElementById('acc-' + id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        body.classList.remove('open');
+        icon.classList.remove('open');
+      }
+    });
+  }
+</script>
